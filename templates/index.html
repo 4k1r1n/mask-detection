@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <title>
+        Выявление на изображении медицинской маски
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+    <h1>Выявление на изображении медицинской маски</h1>
+
+    <form action="/external/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="file-upload" class="text-file-upload">
+            Выбрать изображение:
+        </label>
+        <input id="file-upload" type="file" name="image" required />
+        <div class="border"></div>
+        <input class="button" type="submit" value="Обработать">
+
+    </form>
+
+    {% if raw_url or edit_url %}
+    <div class="img">
+        <div class="img-raw">
+            <p>Image:</p>
+            <img src={{raw_url}}>
+        </div>
+        <div class="img-processed">
+            <p>Processed image:</p>
+            <img src={{edit_url}}>
+        </div>
+    </div>
+
+    {% endif %}
+
+</body>
+
+</html>
